@@ -1,102 +1,34 @@
-const svg = document.querySelector("svg");
+const svg = document.getElementById("svg_field");
+const line = document.getElementById("line");
+const path = document.querySelector ("path");
 const point = svg.createSVGPoint();
+const arrayCordinate = [];
 
-
-function Search() {
-    
-    svg.addEventListener('mousemove', mousemove)
-    
-    function mousemove(event) {
-        point.x = event.clientX; 
-        point.y = event.clientY;
-
-        console.log(point.x), console.log(point.y)
-    }
+function drawLine() {
+    const cordLine = `M${arrayCordinate[0]} ${arrayCordinate[1]} ` + `L${arrayCordinate[2]} ${arrayCordinate[3]}`
+    line.setAttribute("d", cordLine)
 }
 
-var box = svg.getBoundingClientRect();
 
-Search()
 
-// function cursorPoint(event){
+    function Search() {
+
+        svg.addEventListener('mousedown', mousedown)
+    
+        function mousedown(event) {
+            point.x = event.clientX;
+            point.y = event.clientY;
+    
+            x=point.x;
+            y=point.y;
+    
+            arrayCordinate.push(x, y)
+            drawLine()
+    
+            return x, y;
+        }
 
     
-//     const point = svg.createSVGPoint();
+    }
 
-//     point.x = event.clientX; 
-//     point.y = event.clientY;
-
-//     const points = point.matrixTransform(svg.getScreenCTM().inverse());
-
-//     const matrix = panzoomContainer.panzoom("getMatrix");
-
-//     return {
-//         x: points.x * (1 / matrix[0]),
-//         y: points.y * (1 / matrix[3])
-//     };
-   
-//   }
-
-// cursorPoint()
-
-
-//   cursorPoint()
-
-//   svg.addEventListener('mousemove',function(svg){
-//     var loc = cursorPoint(svg);
-
-//   },false);
-
-
-
-
-// const widthField = document.querySelector('#field').offsetWidth;
-// const heightField = document.querySelector('#field').offsetHeight;
-// const colors = ['#992828'];
-
-// draw = false;
-
-// function numberDiv () {
-//     const PIXEL = Math.ceil(Math.ceil(widthField * heightField)/25)
-//     return PIXEL
-// }
-// numberDiv ()
-
-// const PIXEL_ITEMS = numberDiv ();
-
-// function setColor (element) {
-//     element.style.backgroundColor = colors
-// }
-
-//     for(let i=0; i < PIXEL_ITEMS; i++) {
-
-//             let pixel = document.createElement('div')
-//             pixel.classList.add('pixel_div')
-
-//             pixel.addEventListener('mousedown', mousedown)
-//             pixel.addEventListener('mouseover', mouseover)
-//             pixel.addEventListener('mouseup', mouseup)
-
-//             function mousedown (event) {
-//                 draw = true
-//                 setColor(pixel)
-//             }
-
-//             function mouseover() {
-//                 if(draw == true) {
-//                     setColor(pixel)
-//                 }
-//             }
-
-//             function mouseup () {
-//                 draw = false;
-//             }
-
-//             fieldDrawing.append(pixel)
-//     }
-
-
-
-//Нашу запись в примере выше можно немного сократить , используя команду "Закрыть путь", Z. 
-//Эта команда рисует прямую линию от текущего положения обратно к первой точке пути. 
-//Она часто встречается в конце узла пути, хотя и не всегда. Для неё регистр буквы не важен.
+    Search()

@@ -1,4 +1,4 @@
-*{
+/* *{
     box-sizing: border-box;
 }
 
@@ -8,9 +8,17 @@
     text-align: center;
 }
 
-.svg_field{
+.container svg{
     margin: 0 auto;
-    border: red 1px solid;
+    color: red;
     width: 300px;
     height: 300px;
+} */
+
+.line{
+    border: solid 1px red;
+}
+
+#svg_field path.fill {
+	fill: #3ff;
 }
