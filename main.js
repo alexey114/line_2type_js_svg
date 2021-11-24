@@ -3,127 +3,151 @@ const line = document.getElementById("line");
 const path = document.querySelector ("path");
 const point = svg.createSVGPoint();
 const arrayCordinate = [];
+const new_array = [];
+let colors = ['#000000', '#008000','#0000ff']
 let button = true;
-let color;
+let black = false;
+let green = false;
+let blue = false;
 
-click.addEventListener("click", function() {
-    button = !button;
-  })
+//DRAW LINE
 
 function drawLine() {
 
+    const new_array = Array.from(arrayCordinate);
+        new_array.reverse()
+
+        console.log(new_array[1])
+        console.log(new_array[0])
+
+        const newLine_L = `L${new_array[1]} ${new_array[0]} `
+
     if (button == true) {
         const cordLine = `M${arrayCordinate[0]} ${arrayCordinate[1]} ` + `L${arrayCordinate[2]} ${arrayCordinate[3]} ` + `L${arrayCordinate[4]} ${arrayCordinate[5]} ` + `Z`;
+        
         line.setAttribute("d", cordLine)
     } else if (button == false) {
-        const cordLine = `M${arrayCordinate[0]} ${arrayCordinate[1]} ` + `L${arrayCordinate[2]} ${arrayCordinate[3]} ` + `L${arrayCordinate[4]} ${arrayCordinate[5]}` + `L${arrayCordinate[6]} ${arrayCordinate[7]} `;
+        const cordLine = `M${arrayCordinate[0]} ${arrayCordinate[1]} ` + `L${arrayCordinate[2]} ${arrayCordinate[3]} ` + `L${arrayCordinate[4]} ${arrayCordinate[5]} ` +  `${newLine_L} `;
+
         line.setAttribute("d", cordLine)
+
+
+        
+    }
+
+}
+
+function Cordinate() {
+
+    svg.addEventListener('mousedown', mousedown)
+    
+    function mousedown(event) {
+        point.x = event.clientX;
+        point.y = event.clientY;
+
+        x=point.x;
+        y=point.y;
+
+        arrayCordinate.push(x, y)
+
+        drawLine()
+        Color()
+
+        console.log(x, y)
+
+        return x, y;
     }
 }
 
-function Color () {
-    if (color == black) {
-        const colorLine = `stroke:${black}`;
-        line.setAttribute("style", colorLine)
-    } else if (color == green) {
-        const colorLine = `stroke:${green}`;
-        line.setAttribute("style", colorLine)
-    } else if (color == blue) {
-        const colorLine = `stroke:${blue}`;
-        line.setAttribute("style", colorLine)
-    }
-}
+Cordinate()
 
-// function buttonZ () {
-//     const cord = (+ `M${arrayCordinate[0]} ${arrayCordinate[1]} `);
-//     if (1) {
-//         console.log(cord)
-//         return cord;
-//     }
-// }
+    //COLOR
 
-    function Search() {
-
-        svg.addEventListener('mousedown', mousedown)
-    
-        function mousedown(event) {
-            point.x = event.clientX;
-            point.y = event.clientY;
-    
-            x=point.x;
-            y=point.y;
-    
-            arrayCordinate.push(x, y)
-            drawLine()
- 
-            console.log(x, y)
-    
-            return x, y;
+    function Color() {
+        if (black === true) {
+            const colorLine = `stroke:${colors[0]}`;
+            line.setAttribute("style", colorLine)
+        } else if (green === true) {
+            const colorLine = `stroke:${colors[1]}`;
+            line.setAttribute("style", colorLine)
+        } else if (blue === true) {
+            const colorLine = `stroke:${colors[2]}`;
+            line.setAttribute("style", colorLine)
         }
-    
-        console.log(arrayCordinate)
-    
     }
 
-    Search()
+    //BUTTON
 
+    click.addEventListener("click", function() {
+        yes_no.innerHTML = !button;
+        button = !button;
+      })
+    
+      function ClearGreen() {
+        color_green_yes_no.innerHTML = !green;    
+        green = false;
+      }
+    
+      function ClearBlack () {
+        color_black_yes_no.innerHTML = !black;
+        black = false;
+      }
+    
+      function ClearBlue () {
+        color_blue_yes_no.innerHTML = !blue;
+        blue = false;
+      }
+    
+      color_black.addEventListener("click", function() {
+        color_black_yes_no.innerHTML = !black;
+        if(green === true && blue === true) {
+            ClearBlue ()
+            ClearGreen()
+        } else if (green === true) {
+            ClearGreen ()
+        } else if (blue === true) {
+            ClearBlue ()
+        }
+        black = !black;
+      })
+    
+      color_green.addEventListener("click", function() {
+        color_green_yes_no.innerHTML = !green;
+        if(black === true && blue === true) {
+            ClearBlack ()
+            ClearBlue()
+        } else if (black === true) {
+            ClearBlack ()
+        } else if (blue === true) {
+            ClearBlue ()
+        }
+        green = !green;
+      })
+    
+      color_blue.addEventListener("click", function() {
+        color_blue_yes_no.innerHTML = !blue;
+        if(black === true && green === true) {
+            ClearBlack ()
+            ClearGreen()
+        } else if (black === true) {
+            ClearBlack ()
+        } else if (green === true) {
+            ClearGreen ()
+        }
+        blue = !blue;
+      })
 
+    //Получение данных по файлу с SVG в консоль
 
-    // function plusOne () {
-    //     const arrayLength = Math.ceil(arrayCordinate.length/2)
-    //     for (let i=arrayLength; i=arrayLength;i++) {
-    //         let one = i+1
-    //         let two = i+2
-    //         console.log(one)
-    //         console.log(two)
-    //     }
-    // }
-    // plusOne ()
+    function getSvg () {
+        var my_svg_field = document.getElementById("svg_field");
+        var my_svg_line = document.getElementById("line");
+        my_svg_field.outerHTML;
+        my_svg_line.outerHTML;
+        console.log(my_svg_field)
+        console.log(my_svg_line)
+    }
 
+    getSvg ()
 
-
-
-// function getControlPoint(circle) {
-
-//     return {
-//       x: Math.round(),
-//       y: Math.round()
-//     }
-  
-//   }
-
-//   console.log(getControlPoint()) //Object { x: NaN, y: NaN }
-
-// function drawLine() {
-
-//     const
-//         m1 = getControlPoint(node.m1),
-//         m2 = getControlPoint(node.m2),
-//         l1 = getControlPoint(node.l1),
-//         l2 = getControlPoint(node.l2);
-
-//         function updateElement() {
-//             line,
-//             {
-//               x1: m1,
-//               y1: m2,
-//               x2: l1,
-//               y2: l2
-//             }
-//           };
-
-// 'm1,m2,l1,l2,line,path'.split(',').map(s => {
-//     node[s] = document.getElementById(s);
-//   });
-
-//   const
-// cordLine = `M${m1.x} ${m2.y}` + `L${l1.x} ${l2.y}` +
-// (line.classList.contains('fill') ? ' Z' : '');
-
-// updateElement( line,{cordLine} );
-
-// path.textContent = `<path d="${cordLine}" />`;
-
-// }
-
-// drawLine()
+    
