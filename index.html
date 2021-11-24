@@ -11,14 +11,20 @@
         <div class="container">
 
             <!-- <h1>Рисуем линии вместе!</h1> -->
+            <div class="svg_field_block">
+                <svg id="svg_field" width="350" height="300" viewbox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path id="line" d="M0 0 L 0 0" style="stroke:red" />
+                </svg>
+            </div>
 
-            <svg id="svg_field" width="300" height="300" viewbox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <!-- <path d="M0 0 L 0 0" style="stroke:red"/> -->
-                
-                <path id="line" d="M0 0 L 0 0" style="stroke:red" />
-            </svg>
+            <div>
+                <button id="click" value="action">Авто закрытие</button>
 
-            
+                <button class="color_black" value="action">Черный</button>
+                <button class="color_green" value="action">Зеленый</button>
+                <button class="color_blue" value="action">Синий</button>
+            </div>
 
         </div>
         <script src="main.js"></script>

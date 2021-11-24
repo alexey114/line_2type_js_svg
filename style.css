@@ -15,10 +15,49 @@
     height: 300px;
 } */
 
+.svg_field_block{
+    width: 350px;
+    border: black 1px solid;
+    margin-bottom: 20px;
+}
+
 .line{
     border: solid 1px red;
 }
 
-#svg_field path.fill {
-	fill: #3ff;
+#line {
+	fill: none;
 }
+
+
+button {
+    cursor: pointer;
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.color_black{
+    background: black;
+}
+
+.color_green{
+    background: green;
+}
+
+.color_blue{
+    background: blue;
+}
+
+#click{
+    background: red;
+}
+
+#click:focus {
+    background: rgb(141, 9, 9);
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+  }
